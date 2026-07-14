@@ -23,4 +23,7 @@ app.use(express.static("public"))
 // to access user's browser cokkies ans set them i.e  perform CRUD operations
 app.use(cookieParser())
 
+import authRouter from "./routes/auth.routes.js"
+app.use("/api/v1/auth", authRouter)
+
 export{ app }    
