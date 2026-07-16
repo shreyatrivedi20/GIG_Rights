@@ -1,6 +1,8 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors"
+import authRouter from "./routes/auth.routes.js"
+import workerRouter from "./routes/worker.routes.js"
 
 const app = express()
 
@@ -23,7 +25,15 @@ app.use(express.static("public"))
 // to access user's browser cokkies ans set them i.e  perform CRUD operations
 app.use(cookieParser())
 
-import authRouter from "./routes/auth.routes.js"
+
 app.use("/api/v1/auth", authRouter)
+
+app.use("/api/v1/workers", workerRouter)
+
+import { verifyJWT } from "./middlewares/auth.middleware.js"
+
+app.get("/api/v1/test-protected", verifyJWT, (req, res) => {
+    res.status(200).json({ message: "You are logged in!", worker: req.worker })
+})
 
 export{ app }    
