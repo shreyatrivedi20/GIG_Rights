@@ -3,6 +3,9 @@ import cookieParser from "cookie-parser";
 import cors from "cors"
 import authRouter from "./routes/auth.routes.js"
 import workerRouter from "./routes/worker.routes.js"
+import shiftRouter from "./routes/shift.routes.js"
+import anomalyRouter from "./routes/anomaly.routes.js"
+
 
 const app = express()
 
@@ -29,6 +32,13 @@ app.use(cookieParser())
 app.use("/api/v1/auth", authRouter)
 
 app.use("/api/v1/workers", workerRouter)
+
+app.use("/api/v1/shifts", shiftRouter)
+
+app.use("/api/v1/anomalies", anomalyRouter)
+
+//for testing whetherjwt is working fine or not
+
 
 import { verifyJWT } from "./middlewares/auth.middleware.js"
 
