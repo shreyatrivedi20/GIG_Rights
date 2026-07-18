@@ -8,4 +8,4 @@ router.route("/").post(verifyJWT, createShift)
 router.route("/").get(verifyJWT, getShifts)
 router.route("/summary").get(verifyJWT, getEarningsSummary)
 
-export default router
+export default router 

@@ -1,3 +1,7 @@
+import dotenv from "dotenv"
+dotenv.config({ path: './.env' })
+
+
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors"
@@ -5,9 +9,11 @@ import authRouter from "./routes/auth.routes.js"
 import workerRouter from "./routes/worker.routes.js"
 import shiftRouter from "./routes/shift.routes.js"
 import anomalyRouter from "./routes/anomaly.routes.js"
+import collectiveRouter from "./routes/collective.routes.js"
 
 
 const app = express()
+console.log("CORS_ORIGIN is set to:", process.env.CORS_ORIGIN)
 
 app.use(cors({
     origin:process.env.CORS_ORIGIN,
@@ -36,6 +42,8 @@ app.use("/api/v1/workers", workerRouter)
 app.use("/api/v1/shifts", shiftRouter)
 
 app.use("/api/v1/anomalies", anomalyRouter)
+
+app.use("/api/v1/collective", collectiveRouter)
 
 //for testing whetherjwt is working fine or not
 
